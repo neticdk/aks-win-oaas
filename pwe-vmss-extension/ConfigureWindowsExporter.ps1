@@ -13,10 +13,10 @@ Configuration WindowsExporter
       DestinationPath = $PWEPackageLocalPath
     }
 
-    Package OMS {
+    Package PWE {
       Ensure = "Present"
       Path  = $PWEPackageLocalPath
-      Name = 'Prometheus Windows Exporter'
+      Name = 'windows_exporter'
       ProductId = 'D6F05276-350B-4E3B-A608-19D8B00A8396'
       Arguments = 'LISTEN_PORT=9100 ENABLED_COLLECTORS=cpu,cs,container,logical_disk,memory,net,os,service,system,tcp'
       DependsOn = '[xRemoteFile]PWEPackage'

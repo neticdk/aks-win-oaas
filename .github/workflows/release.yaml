@@ -28,7 +28,7 @@ jobs:
       - name: Package Extension
         shell: pwsh
         run: |
-          Publish-AzVMDscConfiguration ./pwe-vmss-extension.zip/ConfigureWindowsExporter.ps1 -OutputArchivePath ./pwe-vmss-extension.zip
+          Publish-AzVMDscConfiguration ./pwe-vmss-extension/ConfigureWindowsExporter.ps1 -OutputArchivePath ./pwe-vmss-extension.zip
       - name: Create release
         run: |
           echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token

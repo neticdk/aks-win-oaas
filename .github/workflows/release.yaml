@@ -1,0 +1,23 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  cd:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Retrieve version
+        id: vars
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      - name: Package Extension
+        run: |
+          zip -r pwe-vmss-extension.zip pwe-vmss-extension
+      - name: Create release
+        run: |
+          echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
+          gh release create ${{ steps.vars.outputs.tag }}
+          gh release upload ${{ steps.vars.outputs.tag }} ./pwe-vmss-extension.zip

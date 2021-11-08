@@ -18,12 +18,13 @@ jobs:
         uses: actions/cache@v2
         with:
           path: "~/.local/share/powershell/Modules"
-          key: ${{ runner.os }}-SqlServer-PSScriptAnalyzer
+          key: ${{ runner.os }}-WindowsExporterExtension
       - name: Install from PSGallery
         shell: pwsh
         run: |
           Set-PSRepository PSGallery -InstallationPolicy Trusted
-          Install-Module Az, xPSDesiredStateConfiguration
+          Install-Module Az.Compute
+          Install-Module xPSDesiredStateConfiguration
       - name: Package Extension
         shell: pwsh
         run: |

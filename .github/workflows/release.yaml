@@ -11,6 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Retrieve version
+        shell: bash
         id: vars
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
       - name: Setup PowerShell module cache
@@ -23,7 +24,6 @@ jobs:
         shell: pwsh
         run: |
           Set-PSRepository PSGallery -InstallationPolicy Trusted
-          Install-Module Az.Compute
           Install-Module xPSDesiredStateConfiguration
       - name: Package Extension
         shell: pwsh

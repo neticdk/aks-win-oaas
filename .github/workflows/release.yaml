@@ -13,9 +13,21 @@ jobs:
       - name: Retrieve version
         id: vars
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
-      - name: Package Extension
+      - name: Setup PowerShell module cache
+        id: cacher
+        uses: actions/cache@v2
+        with:
+          path: "~/.local/share/powershell/Modules"
+          key: ${{ runner.os }}-SqlServer-PSScriptAnalyzer
+      - name: Install from PSGallery
+        shell: pwsh
         run: |
-          zip -j -r pwe-vmss-extension.zip pwe-vmss-extension
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+          Install-Module Az, xPSDesiredStateConfiguration
+      - name: Package Extension
+        shell: pwsh
+        run: |
+          Publish-AzVMDscConfiguration ./pwe-vmss-extension.zip/ConfigureWindowsExporter.ps1 -OutputArchivePath ./pwe-vmss-extension.zip
       - name: Create release
         run: |
           echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token

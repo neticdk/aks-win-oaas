@@ -1,14 +1,15 @@
 Configuration WindowsExporter
 {
-  $PWEPackageLocalPath = 'C:\PrometheusWindowsWxporter\windows_exporter.msi'
+  $PWEPackageLocalPath = 'C:\Windows\Temp\windows_exporter.msi'
   $PWEVersion = '0.16.0'
 
+  Import-DscResource -ModuleName PSDesiredStateConfiguration
   Import-DscResource -ModuleName xPSDesiredStateConfiguration
 
   Node localhost {
 
     xRemoteFile PWEPackage {
-      Uri = "https://github.com/prometheus-community/windows_exporter/releases/download/v" + PWEVersion + "/windows_exporter-" + PWEVersion + "-amd64.msi"
+      Uri = "https://github.com/prometheus-community/windows_exporter/releases/download/v" + $PWEVersion + "/windows_exporter-" + $PWEVersion + "-amd64.msi"
       DestinationPath = $PWEPackageLocalPath
     }
 

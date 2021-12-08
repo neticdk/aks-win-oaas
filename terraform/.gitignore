@@ -1,0 +1,4 @@
+.terraform*
+kube_config.yaml
+*.tfstate*
+plan.out

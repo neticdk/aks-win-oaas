@@ -7,16 +7,17 @@ on:
 
 jobs:
   cd:
-    runs-on: windows-2019
+    runs-on: windows-2025
     steps:
-      - uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v2
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
       - name: Retrieve version
         shell: bash
         id: vars
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
       - name: Setup PowerShell module cache
         id: cacher
-        uses: actions/cache@8492260343ad570701412c2f464a5877dc76bace # v2
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4
         with:
           path: "~/.local/share/powershell/Modules"
           key: ${{ runner.os }}-WindowsExporterExtension

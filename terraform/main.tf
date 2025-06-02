@@ -87,7 +87,7 @@ resource "helm_release" "observability" {
   name       = "oaas-observability"
   repository = "https://neticdk.github.io/k8s-oaas-observability"
   chart      = "oaas-observability"
-  version    = "2.3.24"
+  version    = "2.3.27"
 
   create_namespace = true
   namespace        = "netic-observability-system"
